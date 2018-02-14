@@ -23,9 +23,9 @@ MIT © [b4dnewz](https://b4dnewz.github.io/)
 
 [npm-image]: https://badge.fury.io/js/typosquotter.svg
 [npm-url]: https://npmjs.org/package/typosquotter
-[travis-image]: https://travis-ci.org/b4dnewz/typosquotter.svg?branch=master
-[travis-url]: https://travis-ci.org/b4dnewz/typosquotter
-[daviddm-image]: https://david-dm.org/b4dnewz/typosquotter.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/b4dnewz/typosquotter
-[coveralls-image]: https://coveralls.io/repos/b4dnewz/typosquotter/badge.svg
-[coveralls-url]: https://coveralls.io/r/b4dnewz/typosquotter
+[travis-image]: https://travis-ci.org/b4dnewz/node-typosquotting.svg?branch=master
+[travis-url]: https://travis-ci.org/b4dnewz/node-typosquotting
+[daviddm-image]: https://david-dm.org/b4dnewz/node-typosquotting.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/b4dnewz/node-typosquotting
+[coveralls-image]: https://coveralls.io/repos/b4dnewz/node-typosquotting/badge.svg
+[coveralls-url]: https://coveralls.io/r/b4dnewz/node-typosquotting
