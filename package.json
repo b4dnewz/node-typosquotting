@@ -1,0 +1,59 @@
+{
+  "name": "typosquotter",
+  "version": "0.0.1",
+  "description": "A nodejs script for generate typosquotted domains",
+  "homepage": "",
+  "author": {
+    "name": "b4dnewz",
+    "email": "filippo@codekraft.it",
+    "url": "https://b4dnewz.github.io/"
+  },
+  "files": ["lib"],
+  "main": "lib/index.js",
+  "keywords": ["nodejs", "typosquotting"],
+  "devDependencies": {
+    "coveralls": "^3.0.0",
+    "nsp": "^3.1.0",
+    "eslint": "^4.17.0",
+    "prettier": "^1.10.2",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-config-xo": "^0.20.0",
+    "jest": "^22.2.2",
+    "jest-cli": "^22.2.2"
+  },
+  "scripts": {
+    "prepublish": "nsp check",
+    "pretest": "eslint .",
+    "precommit": "lint-staged",
+    "test": "jest"
+  },
+  "lint-staged": {
+    "*.js": ["eslint --fix", "git add"],
+    "*.json": ["prettier --write", "git add"]
+  },
+  "eslintConfig": {
+    "extends": ["xo", "prettier"],
+    "env": {
+      "jest": true,
+      "node": true
+    },
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": true,
+          "printWidth": 90
+        }
+      ]
+    },
+    "plugins": ["prettier"]
+  },
+  "repository": "b4dnewz/typosquotter",
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "license": "MIT"
+}
