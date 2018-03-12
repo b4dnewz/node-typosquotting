@@ -13,16 +13,16 @@
   "keywords": ["nodejs", "typosquotting"],
   "devDependencies": {
     "coveralls": "^3.0.0",
-    "nsp": "^3.1.0",
-    "eslint": "^4.17.0",
-    "prettier": "^1.10.2",
+    "nsp": "^3.2.1",
+    "eslint": "^4.18.2",
+    "prettier": "^1.11.1",
     "husky": "^0.14.3",
-    "lint-staged": "^6.1.0",
+    "lint-staged": "^7.0.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
-    "eslint-config-xo": "^0.20.0",
-    "jest": "^22.2.2",
-    "jest-cli": "^22.2.2"
+    "eslint-config-xo": "^0.20.1",
+    "jest": "^22.4.2",
+    "jest-cli": "^22.4.2"
   },
   "scripts": {
     "prepublish": "nsp check",
