@@ -1,6 +1,6 @@
 {
   "name": "typosquotter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A nodejs script for generate typosquotted domains",
   "homepage": "",
   "author": {
