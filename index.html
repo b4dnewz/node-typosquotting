@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Typosquotting</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+  <script src="https://unpkg.com/vue"></script>
+  <script type="text/javascript" src="dist/main.js"></script>
+  <style>
+    .has-vertical-margin {
+      margin: 25px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+
+    <section class="hero is-dark is-bold">
+      <div class="hero-body">
+        <div class="container">
+
+          <nav class="level">
+            <div class="level-left">
+              <div class="level-item">
+                <h1 class="title">Typosquotter</h1>
+              </div>
+            </div>
+
+            <div class="level-right">
+              <div class="level-item">
+                <div class="field is-grouped">
+                  <div class="control is-expanded">
+                    <input class="input" type="text" v-model="inputValue" placeholder="Enter a domain name">
+                  </div>
+                  <div class="control">
+                    <a class="button is-light" @click="getDomains">Generate</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="level-item">
+                <a class="button is-light" href="https://github.com/b4dnewz/node-typosquotting">
+                  <span>Download</span>
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="content has-vertical-margin">
+      <div class="container" v-if="inputResult">
+        <nav class="level" v-if="inputResult">
+          <div class="level-item has-text-centered" v-for="(value, key) in inputResult">
+            <div>
+              <p class="heading" v-text="key"></p>
+              <p class="title" v-lazy-counter="{value: value.length}"></p>
+            </div>
+          </div>
+        </nav>
+
+        <div v-for="(value, key) in inputResult">
+          <h1 class="title" v-text="key"></h1>
+          <h2 class="subtitle">{{value.length}} entries</h2>
+
+          <ul>
+            <li v-for="(item, index) in value" :key="index" v-text="item"></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Typosquotter</strong> by <a href="https://b4dnewz.github.io/">Filippo Conti</a>. The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    Vue.directive('lazy-counter', function (el, binding) {
+      let count = 0;
+      const value = binding.value.value;
+      const delay = binding.value.delay || 25;
+      const promise = setInterval(function () {
+        if (count >= value) {
+          clearInterval(promise);
+          return;
+        }
+
+        el.innerText = count;
+        count++;
+      }, delay);
+    })
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        inputValue: '',
+        inputResult: null
+      },
+      methods: {
+        getDomains () {
+          this.inputResult = typosquotter(this.inputValue)
+        }
+      }
+    })
+  </script>
+</body>
+</html>
