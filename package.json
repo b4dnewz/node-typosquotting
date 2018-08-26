@@ -1,7 +1,7 @@
 {
   "name": "typosquotter",
   "version": "0.0.3",
-  "description": "A nodejs script for generate typosquotted domains",
+  "description": "A NodeJS tool for generating typosquotted domains",
   "homepage": "https://github.com/b4dnewz/node-typosquotting",
   "author": {
     "name": "b4dnewz",
@@ -13,6 +13,9 @@
     "dist"
   ],
   "main": "lib/index.js",
+  "bin": {
+    "typosquotter": "lib/cli.js"
+  },
   "browser": "dist/main.js",
   "keywords": [
     "nodejs",
@@ -29,7 +32,6 @@
     "webpack-cli": "^3.1.0"
   },
   "scripts": {
-    "prepublish": "nsp check",
     "pretest": "npm run lint",
     "precommit": "lint-staged",
     "test": "jest --coverage",
@@ -43,7 +45,9 @@
     ]
   },
   "eslintConfig": {
-    "extends": ["eslint:recommended"],
+    "extends": [
+      "eslint:recommended"
+    ],
     "env": {
       "jest": true,
       "node": true
@@ -56,5 +60,8 @@
   "jest": {
     "testEnvironment": "node"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "meow": "^5.0.0"
+  }
 }
