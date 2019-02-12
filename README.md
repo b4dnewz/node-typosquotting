@@ -8,45 +8,99 @@
 
 You can use it as nodejs module:
 
-```sh
+```
 $ npm install --save typosquotter
 ```
 
 But the package provides a basic cli features also, you can install it globally and use it from the command line everywhere:
 
-```sh
+```
 $ npm install -g typosquotter
 
 $ typosquotter --help
 ```
 
-Or if you already have installed it locally you can run the following:
+Or if you want to quick use it without installing it:
 
-```sh
-$ node node_modules/typosquotter/lib/cli --help
+```
+$ npx typosquotter --help
 ```
 
 ## Usage
 
-Just call it with a hostname and it will return all the possible typosquotted domains using various techniques.
+The simplest usage it to call it with a hostname and it will return all the possible typosquotted domains using various techniques.
 
 ```js
 const typosquotter = require('typosquotter');
+const options = {}
 
-console.log(typosquotter('amazon.com'));
+console.log(
+  typosquotter('youtube.com', options)
+);
 
-// '𝒶mazon.com'
-// '𝓪mazon.com'
-// '𝛼mazon.com'
-// '𝔞mazon.com'
-// '𝑎mazon.com'
-// '𝐚mazon.com'
-// '𝜶mazon.com'
-// '𝕒mazon.com'
-// '𝖺mazon.com'
-// '⍺mazon.com'
-// ...
+// repetition: [
+//   'yyoutube.com',
+//   'yooutube.com',
+//   'youutube.com',
+//   'youttube.com',
+//   'youtuube.com',
+//   'youtubbe.com',
+//   'youtubee.com'
+// ],
+// subdomain: [
+//   'y.outube.com',
+//   'yo.utube.com',
+//   'you.tube.com',
+//   'yout.ube.com',
+//   'youtu.be.com',
+//   'youtub.e.com'
+// ],
+// switching: [
+//   'oyutube.com',
+//   'yuotube.com',
+//   'yotuube.com',
+//   'youutbe.com',
+//   'youtbue.com',
+//   'youtueb.com'
+// ],
+// tld: [
+//   'youtube.ac',
+//   'youtube.ad',
+//   'youtube.ae',
+//   ...
 ```
+
+## Examples
+
+Create typosquotted domain using all techniques:
+
+```js
+typosquotter('youtube.com')
+```
+
+Create a flatten array of typosquotted domain using all techniques:
+
+```js
+typosquotter('youtube.com', { flat: true })
+```
+
+Create typosquotted domain using a specific technique:
+
+```js
+typosquotter('youtube.com', {
+  only: ['repetition']
+})
+```
+
+Create typosquotted domain using all techniques but not the excluded:
+
+```js
+typosquotter('youtube.com', {
+  exclude: ['tld', 'vowelswap']
+})
+```
+
+---
 
 ## License
 
