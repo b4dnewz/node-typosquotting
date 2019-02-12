@@ -8,35 +8,37 @@
     "email": "filippo@codekraft.it",
     "url": "https://b4dnewz.github.io/"
   },
+  "license": "MIT",
+  "repository": "b4dnewz/node-typosquotting",
   "files": [
     "lib",
     "dist"
   ],
   "main": "lib/index.js",
-  "bin": {
-    "typosquotter": "lib/cli.js"
-  },
+  "bin": "lib/cli.js",
   "browser": "dist/main.js",
   "keywords": [
     "nodejs",
     "typosquotting"
   ],
-  "devDependencies": {
-    "coveralls": "^3.0.0",
-    "eslint": "^4.18.2",
-    "husky": "^0.14.3",
-    "jest": "^22.4.2",
-    "jest-cli": "^22.4.2",
-    "lint-staged": "^7.0.0",
-    "webpack": "^4.16.5",
-    "webpack-cli": "^3.1.0"
-  },
   "scripts": {
     "pretest": "npm run lint",
     "precommit": "lint-staged",
     "test": "jest --coverage",
     "lint": "eslint --fix .",
     "build": "webpack"
+  },
+  "dependencies": {
+    "meow": "^5.0.0"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.2",
+    "eslint": "^5.13.0",
+    "jest": "^24.1.0",
+    "jest-cli": "^24.1.0",
+    "lint-staged": "^8.1.3",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
   },
   "lint-staged": {
     "*.js": [
@@ -56,12 +58,7 @@
       "ecmaVersion": 6
     }
   },
-  "repository": "b4dnewz/typosquotter",
   "jest": {
     "testEnvironment": "node"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "meow": "^5.0.0"
   }
 }
