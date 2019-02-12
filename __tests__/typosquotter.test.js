@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const common = require('../common.js');
-const typosquotter = require('../index.js');
+const common = require('../lib/common.js');
+const typosquotter = require('../lib/index.js');
 
 function rndAlphaNum(len) {
   let str = '';
@@ -18,7 +18,7 @@ function fuzzyDomain(len) {
 
 let result = null;
 let value = fuzzyDomain(10);
-let techniquesPath = path.join(__dirname, '../techniques');
+let techniquesPath = path.join(__dirname, '../lib/techniques');
 
 describe('typosquotter', () => {
   it('exports a function', () => {
@@ -29,10 +29,10 @@ describe('typosquotter', () => {
     expect(typosquotter.length).toBe(1);
   });
 
-  it('fail if no argument', () => {
-    const spy = jest.spyOn(global.console, 'warn')
-    expect(typosquotter()).toBeFalsy();
-    expect(spy).toHaveBeenCalled();
+  it('throw if no argument', () => {
+    expect(() => {
+      typosquotter()
+    }).toThrow();
   });
 
   describe('options', () => {
@@ -40,28 +40,24 @@ describe('typosquotter', () => {
       const result = typosquotter('ebay.it', {flat: true});
       expect(Array.isArray(result)).toBeTruthy();
     })
-  });
 
-  describe('String manipulation methods', () => {
-    it('switch the characters by index', () => {
-      expect(common.switchCharAt('example', 2)).toEqual('exmaple');
-    });
+    it('only: specify techniques to run', () => {
+      const result = typosquotter('ebay.it', {
+        only: ['vowelswap']
+      });
+      expect(result.vowelswap).toBeDefined();
+      expect(result.omission).toBeUndefined();
+      expect(result.repetition).toBeUndefined();
+    })
 
-    it('duplicate the characters by index', () => {
-      expect(common.doubleCharAt('example', 2)).toEqual('exaample');
-    });
-
-    it('add a character at index', () => {
-      expect(common.addCharAt('example', 2, 'b')).toEqual('exbample');
-    });
-
-    it('remove a character at index', () => {
-      expect(common.removeCharAt('example', 2)).toEqual('exmple');
-    });
-
-    it('replace a character at index', () => {
-      expect(common.replaceCharAt('example', 2, 'b')).toEqual('exbmple');
-    });
+    it('exclude: specify techniques to exclude', () => {
+      const result = typosquotter('ebay.it', {
+        exclude: ['vowelswap']
+      });
+      expect(result.vowelswap).toBeUndefined();
+      expect(result.omission).toBeDefined();
+      expect(result.repetition).toBeDefined();
+    })
   });
 
   describe(`Fuzzy testing with ${value}`, () => {
@@ -89,5 +85,27 @@ describe('typosquotter', () => {
         expect(Array.isArray(result[name])).toBeTruthy();
       });
     });
+  });
+});
+
+describe('typosquotter:utils', () => {
+  it('switch the characters by index', () => {
+    expect(common.switchCharAt('example', 2)).toEqual('exmaple');
+  });
+
+  it('duplicate the characters by index', () => {
+    expect(common.doubleCharAt('example', 2)).toEqual('exaample');
+  });
+
+  it('add a character at index', () => {
+    expect(common.addCharAt('example', 2, 'b')).toEqual('exbample');
+  });
+
+  it('remove a character at index', () => {
+    expect(common.removeCharAt('example', 2)).toEqual('exmple');
+  });
+
+  it('replace a character at index', () => {
+    expect(common.replaceCharAt('example', 2, 'b')).toEqual('exbmple');
   });
 });
