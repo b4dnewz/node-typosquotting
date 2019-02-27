@@ -70,7 +70,6 @@ describe('typosquotter', () => {
       expect(typeof result).toBe('object');
       Object.keys(result).forEach(k => {
         expect(Array.isArray(result[k])).toBeTruthy();
-        expect(result[k]).not.toHaveLength(0);
       });
     });
 
