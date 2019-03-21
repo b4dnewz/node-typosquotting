@@ -1,18 +1,24 @@
 # typosquotter
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage percentage][coveralls-image]][coveralls-url] [![Project License][license-image]][license-url]
 
 > A NodeJS tool for generating typosquotted domains
 
+Checkout the web [demo](https://b4dnewz.github.io/node-typosquotting/) with a working example.
+
 ## Installation
 
-You can use it as nodejs module:
+#### As a node module
+
+You can use it in your scripts as a node module:
 
 ```
 $ npm install --save typosquotter
 ```
 
-But the package provides a basic cli features also, you can install it globally and use it from the command line everywhere:
+#### As a command line tool
+
+The package provides an executable script, you can install it globally and use it from the command line everywhere:
 
 ```
 $ npm install -g typosquotter
@@ -24,6 +30,14 @@ Or if you want to quick use it without installing it:
 
 ```
 $ npx typosquotter --help
+```
+
+#### From the CDN for the browser
+
+If you want to use it in your websites or web application:
+
+```html
+<script src="https://unpkg.com/typosquotter/dist/main.js"></script>
 ```
 
 ## Usage
@@ -102,6 +116,17 @@ typosquotter('youtube.com', {
 
 ---
 
+## Contributing
+
+1.  Create an issue and describe your idea
+2.  Fork the project (<https://github.com/b4dnewz/node-typosquotting/fork>)
+3.  Create your feature branch (`git checkout -b my-new-feature`)
+4.  Commit your changes (`git commit -am 'Add some feature'`)
+5.  Publish the branch (`git push origin my-new-feature`)
+6.  Create a new Pull Request
+
+---
+
 ## License
 
 MIT © [b4dnewz](https://b4dnewz.github.io/)
@@ -117,3 +142,7 @@ MIT © [b4dnewz](https://b4dnewz.github.io/)
 [coveralls-image]: https://coveralls.io/repos/b4dnewz/node-typosquotting/badge.svg
 
 [coveralls-url]: https://coveralls.io/r/b4dnewz/node-typosquotting
+
+[license-image]: https://img.shields.io/badge/license-MIT-blue.svg
+
+[license-url]: https://github.com/b4dnewz/node-typosquotting/blob/master/LICENSE

@@ -1,114 +1,143 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Typosquotting</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
-  <script src="https://unpkg.com/vue"></script>
-  <script type="text/javascript" src="dist/main.js"></script>
-  <style>
-    .has-vertical-margin {
-      margin: 25px 0;
-    }
-  </style>
-</head>
-<body>
-  <div id="app">
+  <head>
+    <meta charset="utf-8">
+    <title>Typosquotter Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" />
+    <style>
+      #app {
+        height: 100%;
+        width: 100%;
+        min-height: 100vh;
+        position: relative;
+      }
 
-    <section class="hero is-dark is-bold">
-      <div class="hero-body">
-        <div class="container">
+      .hero .field {
+        max-width: 600px;
+      }
+      .hero input:focus {
+        outline: none;
+        border-color: transparent;
+        box-shadow: none;
+      }
 
-          <nav class="level">
-            <div class="level-left">
-              <div class="level-item">
-                <h1 class="title">Typosquotter</h1>
+      .result-container {
+        margin-bottom: 200px;
+      }
+      .result-container .level {
+        margin-top: 3rem;
+      }
+
+      .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <section class="hero is-dark">
+        <div class="hero-body">
+          <div class="container">
+            <p class="title">
+              Typosquotter
+            </p>
+            <p class="subtitle">
+              generator of typosquotted domain names
+            </p>
+
+            <div class="field has-addons">
+              <div class="control is-expanded">
+                <input class="input" type="text" placeholder="Enter a domain name" v-model="inputText" @keyup.enter="run">
               </div>
-            </div>
-
-            <div class="level-right">
-              <div class="level-item">
-                <div class="field is-grouped">
-                  <div class="control is-expanded">
-                    <input class="input" type="text" v-model="inputValue" placeholder="Enter a domain name">
-                  </div>
-                  <div class="control">
-                    <a class="button is-light" @click="getDomains">Generate</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="level-item">
-                <a class="button is-light" href="https://github.com/b4dnewz/node-typosquotting">
-                  <span>Download</span>
+              <div class="control">
+                <a class="button is-primary is-uppercase" @click="run">
+                  Generate
                 </a>
               </div>
             </div>
-          </nav>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="content has-vertical-margin">
-      <div class="container" v-if="inputResult">
-        <nav class="level" v-if="inputResult">
-          <div class="level-item has-text-centered" v-for="(value, key) in inputResult">
+      <div class="container result-container" v-show="result">
+        <nav class="level">
+          <div class="level-item has-text-centered" v-for="(values, technique) in result" :key="technique">
             <div>
-              <p class="heading" v-text="key"></p>
-              <p class="title" v-lazy-counter="{value: value.length}"></p>
+              <p class="heading is-uppercase">{{technique}}</p>
+              <p class="title" v-lazy-counter="{value: values.length, delay: 10}"></p>
             </div>
           </div>
         </nav>
 
-        <div v-for="(value, key) in inputResult">
-          <h1 class="title" v-text="key"></h1>
-          <h2 class="subtitle">{{value.length}} entries</h2>
-
-          <ul>
-            <li v-for="(item, index) in value" :key="index" v-text="item"></li>
-          </ul>
+        <div class="content">
+          <section class="section" v-for="(values, technique) in result" :key="technique">
+            <h3 class="title is-capitalized">{{technique}}</h3>
+            <div class="list is-hoverable">
+              <a class="list-item" :href="'http://' + value" target="_blank" v-for="(value, index) in values" :key="index">
+                {{value}}
+              </a>
+            </div>
+          </section>
         </div>
       </div>
-    </section>
 
-    <footer class="footer">
-      <div class="content has-text-centered">
-        <p>
-          <strong>Typosquotter</strong> by <a href="https://b4dnewz.github.io/">Filippo Conti</a>. The source code is licensed
-          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
-        </p>
-      </div>
-    </footer>
-  </div>
-
-  <script>
-    Vue.directive('lazy-counter', function (el, binding) {
-      let count = 0;
-      const value = binding.value.value;
-      const delay = binding.value.delay || 25;
-      const promise = setInterval(function () {
-        if (count >= value) {
-          clearInterval(promise);
-          return;
-        }
-
-        el.innerText = count;
-        count++;
-      }, delay);
-    })
-
-    const app = new Vue({
+      <footer class="footer">
+        <div class="container content">
+          <p>
+            <strong>typosquotter</strong> is made by <a href="https://b4dnewz.github.io/">Filippo Conti</a>.
+            The source code is <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+          </p>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="./dist/main.js"></script>
+  <script type="text/javascript">
+    new Vue({
       el: '#app',
-      data: {
-        inputValue: '',
-        inputResult: null
+      data: function () {
+        return {
+          inputText: '',
+          result: null
+        }
       },
       methods: {
-        getDomains () {
-          this.inputResult = typosquotter(this.inputValue)
+        run: function() {
+          const input = this.inputText
+          const res = typosquotter(input)
+          this.result = res;
+        }
+      },
+      directives: {
+        lazyCounter: function (el, binding) {
+          if (!binding.value) {
+            return;
+          }
+
+          const value = binding.value.value;
+          const delay = binding.value.delay || 25;
+
+          if (binding.oldValue && binding.oldValue.value === value) {
+            return;
+          }
+
+          let count = 0;
+          const promise = setInterval(function () {
+            if (count >= value) {
+              clearInterval(promise);
+              return;
+            }
+
+            el.innerText = count;
+            count++;
+          }, delay);
         }
       }
     })
   </script>
-</body>
 </html>
