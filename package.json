@@ -24,6 +24,8 @@
   "scripts": {
     "pretest": "npm run lint",
     "precommit": "lint-staged",
+    "prepublish": "npm run build",
+    "prebuild": "npm run test",
     "test": "jest --coverage",
     "lint": "eslint --fix .",
     "build": "webpack"
