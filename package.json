@@ -1,6 +1,6 @@
 {
   "name": "typosquotter",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A NodeJS tool for generating typosquotted domain names",
   "homepage": "https://github.com/b4dnewz/node-typosquotting",
   "author": {
