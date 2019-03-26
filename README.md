@@ -16,29 +16,30 @@ You can use it in your scripts as a node module:
 $ npm install --save typosquotter
 ```
 
-#### As a command line tool
-
-The package provides an executable script, you can install it globally and use it from the command line everywhere:
-
-```
-$ npm install -g typosquotter
-
-$ typosquotter --help
-```
-
-Or if you want to quick use it without installing it:
-
-```
-$ npx typosquotter --help
-```
-
-#### From the CDN for the browser
+#### For the browser
 
 If you want to use it in your websites or web application:
 
 ```html
 <script src="https://unpkg.com/typosquotter/dist/main.js"></script>
 ```
+
+#### As a command line tool
+
+If you want to use __typosquotter__ from your command line, you have to install the [global module](https://github.com/b4dnewz/node-typosquotting-cli/) than you can use it from the command line everywhere:
+
+```
+$ npm install -g typosquotter-cli
+
+$ typosquotter --help
+```
+
+Or if you want to try it out or quick use it without having to installing it:
+
+```
+$ npx typosquotter-cli --help
+```
+
 
 ## Usage
 
@@ -129,7 +130,7 @@ typosquotter('youtube.com', {
 
 ## License
 
-MIT © [b4dnewz](https://b4dnewz.github.io/)
+This package is under [MIT](LICENSE) license © [b4dnewz](https://b4dnewz.github.io/)
 
 [npm-image]: https://badge.fury.io/js/typosquotter.svg
 
